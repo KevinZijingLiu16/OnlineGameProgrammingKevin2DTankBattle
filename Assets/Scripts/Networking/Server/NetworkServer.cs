@@ -39,6 +39,8 @@ public class NetworkServer : IDisposable
     private void OnNetworkReady()
     {
         networkManager.OnClientDisconnectCallback += OnClientDisconnect;
+
+       
     }
 
     private void OnClientDisconnect(ulong clientId)
@@ -48,6 +50,21 @@ public class NetworkServer : IDisposable
             clientIdToAuth.Remove(clientId);
             authIdToUserData.Remove(authId);
         }
+    }
+
+    public UserData GetUserDataByClientId(ulong clientId)
+    {
+        if(clientIdToAuth.TryGetValue(clientId, out string authId))
+        {
+            if(authIdToUserData.TryGetValue(authId, out UserData userData))
+            {
+                return userData;
+            }
+
+            return null;
+        }
+
+        return null;
     }
 
     public void Dispose()
