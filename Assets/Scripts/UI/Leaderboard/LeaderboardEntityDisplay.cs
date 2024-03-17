@@ -42,8 +42,8 @@ public class LeaderboardEntityDisplay : MonoBehaviour
     public void UpdateText()
     {
 
-        //displayText.text = $"#{transform.GetSiblingIndex() + 1}. {playerName} ({Coins})";
-        displayText.text = $"#{transform.GetSiblingIndex() + 1} Tank has ({Coins}) coins";
+        displayText.text = $"#{transform.GetSiblingIndex() + 1}. {playerName} ({Coins})";
+        //displayText.text = $"#{transform.GetSiblingIndex() + 1} Tank has ({Coins}) coins";
     }
 
 }

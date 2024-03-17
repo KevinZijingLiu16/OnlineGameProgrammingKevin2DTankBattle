@@ -9,7 +9,7 @@ public class NetworkClient : IDisposable
 {
     private NetworkManager networkManager;
 
-    private const string menuSceneName = "MainMenu";
+    private const string MenuSceneName = "Menu";
 
     public NetworkClient(NetworkManager networkManager)
     {
@@ -18,27 +18,25 @@ public class NetworkClient : IDisposable
         networkManager.OnClientDisconnectCallback += OnClientDisconnect;
     }
 
-
-   
-   
     private void OnClientDisconnect(ulong clientId)
     {
-      if(clientId != 0 && clientId != networkManager.LocalClientId)
+        if (clientId != 0 && clientId != networkManager.LocalClientId) { return; }
+
+        Disconnect();
+    }
+
+    public void Disconnect()
+    {
+        if (SceneManager.GetActiveScene().name != MenuSceneName)
         {
-            return;
+            SceneManager.LoadScene(MenuSceneName);
         }
 
-      if(SceneManager.GetActiveScene().name != menuSceneName)
-        {
-            SceneManager.LoadScene(menuSceneName);
-        }
-
-      if (networkManager.IsConnectedClient)
+        if (networkManager.IsConnectedClient)
         {
             networkManager.Shutdown();
         }
     }
-
 
     public void Dispose()
     {
@@ -47,6 +45,4 @@ public class NetworkClient : IDisposable
             networkManager.OnClientDisconnectCallback -= OnClientDisconnect;
         }
     }
-
 }
-

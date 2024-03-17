@@ -71,6 +71,7 @@ public class Leaderboard : NetworkBehaviour
         switch(changeEvent.Type)
         {
             case NetworkListEvent<LeaderboardEntityState>.EventType.Add:
+                Debug.Log($"[Leaderboard Add] Adding player: {changeEvent.Value.PlayerName}");
                 if (!entityDisplays.Any(x => x.ClientId == changeEvent.Value.ClientId))
                 {
                    LeaderboardEntityDisplay leaderboardEntity =
@@ -85,7 +86,8 @@ public class Leaderboard : NetworkBehaviour
 
 
             case NetworkListEvent<LeaderboardEntityState>.EventType.Remove:
-               LeaderboardEntityDisplay displayToRemove =
+                Debug.Log($"[Leaderboard Remove] Removing player: {changeEvent.Value.PlayerName}");
+                LeaderboardEntityDisplay displayToRemove =
                     entityDisplays.FirstOrDefault(x => x.ClientId == changeEvent.Value.ClientId);
                 if (displayToRemove != null)
                 {
@@ -97,6 +99,7 @@ public class Leaderboard : NetworkBehaviour
                 break;
              
             case NetworkListEvent<LeaderboardEntityState>.EventType.Value:
+                Debug.Log($"[Leaderboard Value] Updating player: {changeEvent.Value.PlayerName}");
                 LeaderboardEntityDisplay displayToUpdate =
                     entityDisplays.FirstOrDefault(x => x.ClientId == changeEvent.Value.ClientId);
                 if (displayToUpdate != null)
@@ -171,7 +174,7 @@ public class Leaderboard : NetworkBehaviour
        HandlePlayerCoinsChanged(player.OwnerClientId, newCoins);
     }
 
-    private void HandlePlayerCoinsChanged(ulong clientId, int newCoins)
+    public void HandlePlayerCoinsChanged(ulong clientId, int newCoins)
     {
         for (int i = 0; i < leaderboardEntities.Count; i++)
         {
@@ -190,4 +193,29 @@ public class Leaderboard : NetworkBehaviour
             return;
         }
     }
+    private void LogPlayerWithMostCoins()
+    {
+        LeaderboardEntityState playerWithMostCoins = new LeaderboardEntityState(); // Initialize with default values
+        int maxCoins = int.MinValue;
+
+        foreach (var entity in leaderboardEntities)
+        {
+            if (entity.Coins > maxCoins)
+            {
+                maxCoins = entity.Coins;
+                playerWithMostCoins = entity;
+            }
+        }
+
+        if (!playerWithMostCoins.Equals(default(LeaderboardEntityState))) // Check against default value
+        {
+            Debug.Log($"Player with the most coins: {playerWithMostCoins.PlayerName}, Coins: {playerWithMostCoins.Coins}");
+        }
+        else
+        {
+            Debug.Log("No players in the leaderboard.");
+        }
+    }
+
+
 }

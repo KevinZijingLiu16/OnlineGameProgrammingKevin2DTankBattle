@@ -19,7 +19,7 @@ public class ClientGameManager : IDisposable
 {
     private JoinAllocation allocation;
 
-    private NetworkClient networkClinet;
+    private NetworkClient networkClient;
 
     private const string MenuSceneName = "MainMenu";
 
@@ -28,7 +28,7 @@ public class ClientGameManager : IDisposable
         await UnityServices.InitializeAsync();
 
 
-        networkClinet = new NetworkClient(NetworkManager.Singleton);
+        networkClient = new NetworkClient(NetworkManager.Singleton);
 
         AuthState authState = await AuthenticationWrapper.DoAuth();
 
@@ -78,9 +78,15 @@ public class ClientGameManager : IDisposable
         NetworkManager.Singleton.StartClient();
     }
 
+
+    internal void Disconnect()
+    {
+        networkClient.Disconnect();
+    }
+
     public void Dispose()
     {
-        networkClinet?.Dispose();
+        networkClient?.Dispose();
     }
 
 }
