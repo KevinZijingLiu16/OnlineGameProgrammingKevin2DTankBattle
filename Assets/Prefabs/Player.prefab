@@ -782,7 +782,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 2592909492980799256}
   playerCollider: {fileID: 6914231553636948504}
   projectileSpeed: 30
-  fireRate: 0.75
+  fireRate: 0.5
   muzzleFlashDuration: 0.1
   costToFire: 5
 --- !u!114 &-3894678360846557066
@@ -828,6 +828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 2080234903983178223}
   <Health>k__BackingField: {fileID: -3894678360846557066}
+  <Wallet>k__BackingField: {fileID: 1314446045476687362}
   ownerPriority: 15
   PlayerName:
     m_InternalValue:
