@@ -9,7 +9,7 @@ public class NetworkClient : IDisposable
 {
     private NetworkManager networkManager;
 
-    private const string MenuSceneName = "Menu";
+    private const string MenuSceneName = "MainMenu";
 
     public NetworkClient(NetworkManager networkManager)
     {

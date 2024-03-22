@@ -11,15 +11,15 @@ public class LeaderboardEntityDisplay : MonoBehaviour
     [SerializeField] private TMP_Text displayText;
     [SerializeField] private Color myColor;
 
-    private FixedString32Bytes playerName;
+    private FixedString32Bytes displayName;
 
     public ulong ClientId { get; private set; }
     public int Coins { get; private set; }
 
-    public void Initialise(ulong clientId, FixedString32Bytes playerName, int coins)
+    public void Initialise(ulong clientId, FixedString32Bytes displayName, int coins)
     {
         ClientId = clientId;
-        this.playerName = playerName;
+        this.displayName = displayName;
 
         if(clientId == NetworkManager.Singleton.LocalClientId)
         {
@@ -41,8 +41,8 @@ public class LeaderboardEntityDisplay : MonoBehaviour
 
     public void UpdateText()
     {
-
-        displayText.text = $"#{transform.GetSiblingIndex() + 1}. {playerName} ({Coins})";
+        
+        displayText.text = $"#{transform.GetSiblingIndex() + 1}. Player {ClientId +1} ({Coins})";
         //displayText.text = $"#{transform.GetSiblingIndex() + 1} Tank has ({Coins}) coins";
     }
 

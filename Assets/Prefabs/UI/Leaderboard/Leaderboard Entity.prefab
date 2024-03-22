@@ -99,7 +99,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 36
-  m_fontStyle: 0
+  m_fontStyle: 2
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -148,4 +148,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayText: {fileID: 701037156659196100}
-  myColor: {r: 0.56078434, g: 1, b: 0.25943398, a: 1}
+  myColor: {r: 0.45151982, g: 1, b: 0.24056602, a: 1}

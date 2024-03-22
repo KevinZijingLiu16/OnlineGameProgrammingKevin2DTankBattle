@@ -149,32 +149,25 @@ public class Leaderboard : NetworkBehaviour
        });
 
         player.Wallet.TotalCoins.OnValueChanged += (oldCoins,newCoins) =>
-        HandlePlayerCoinsChanged(player.OwnerClientId, newCoins);
+        HandleCoinsChanged(player.OwnerClientId, newCoins);
     }
 
     private void HandlePlayerDespawned(TankPlayer player)
     {
-        if (IsServer && player.OwnerClientId == OwnerClientId) { return; }
-        if (leaderboardEntities == null)
+        foreach (LeaderboardEntityState entity in leaderboardEntities)
         {
-            return;
-        }
-        foreach(LeaderboardEntityState entity in leaderboardEntities)
-        {
-            if(entity.ClientId != player.OwnerClientId)
-            {
-                continue;
-            }
+            if (entity.ClientId != player.OwnerClientId) { continue; }
 
             leaderboardEntities.Remove(entity);
             break;
         }
 
         player.Wallet.TotalCoins.OnValueChanged -= (oldCoins, newCoins) =>
-       HandlePlayerCoinsChanged(player.OwnerClientId, newCoins);
+            HandleCoinsChanged(player.OwnerClientId, newCoins);
     }
 
-    public void HandlePlayerCoinsChanged(ulong clientId, int newCoins)
+
+    public void HandleCoinsChanged(ulong clientId, int newCoins)
     {
         for (int i = 0; i < leaderboardEntities.Count; i++)
         {

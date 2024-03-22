@@ -39,7 +39,7 @@ public class CoinTracker : MonoBehaviour
             playerCoins[clientId] = newValue;
 
             // Notify the Leaderboard script of the change
-            leaderboard.HandlePlayerCoinsChanged(clientId, newValue);
+            leaderboard.HandleCoinsChanged(clientId, newValue);
         }
     }
 }
