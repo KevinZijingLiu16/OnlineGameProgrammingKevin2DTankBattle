@@ -8,7 +8,7 @@ public class PlayerAiming : NetworkBehaviour
     [SerializeField] private InputReader inputReader;
     [SerializeField] private Transform turretTransform;
 
-    private void LateUpdate()
+    private void LateUpdate() // LateUpdate is called after Update each frame, reason is the rigidbody is interpolated by setting
     {
        if (!IsOwner) return;
 

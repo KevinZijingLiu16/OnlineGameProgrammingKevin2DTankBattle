@@ -10,7 +10,7 @@ using System;
 
 public class InputReader : ScriptableObject, IPlayerActions
 {
-    public event Action<bool> PrimaryFireEvent;
+    public event Action<bool> PrimaryFireEvent; //shooting or not shooting
     public event Action<Vector2> MoveEvent;
 
     public Vector2 AimPosition { get; private set; }
